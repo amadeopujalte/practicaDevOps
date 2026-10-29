@@ -75,3 +75,9 @@ jobs:
             ${{ vars.DOCKERHUB_USERNAME }}/dds-devops-demo:latest
           docker push \
             ${{ vars.DOCKERHUB_USERNAME }}/dds-devops-demo:${GITHUB_SHA::7}
+      - name: Desplegar en Render
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          curl -X POST "$RENDER_DEPLOY_HOOK"
+         
